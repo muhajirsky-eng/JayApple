@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Toko E-Commerce Jayapple. Belanja iPhone, MacBook, iPad, dan AirPods resmi serta garansi toko dengan kurasi teliti, komparasi spesifikasi, dan invoice instan berbasis localStorage.">
+  <title>Jayapple | Apple Authorized & Pre-Owned Store</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="wordmark-wrap" href="#top" aria-label="Kembali ke beranda Jayapple">
+      <img src="images/logo.png" alt="Logo Jayapple" class="site-logo" width="36" height="36">
+      <span class="wordmark-text">Jayapple</span>
+    </a>
+    <div class="header-right">
+      <button id="compare-nav-btn" class="header-action-btn" type="button" aria-label="Buka alat komparasi spesifikasi">
+        <span class="btn-icon" aria-hidden="true">⇄</span>
+        <span class="btn-text">Komparasi</span>
+        <span id="compare-badge" class="action-badge" aria-live="polite">0</span>
+      </button>
+      <button id="cart-toggle-btn" class="header-action-btn cart-btn-accent" type="button" aria-label="Buka keranjang belanja" aria-expanded="false" aria-controls="cart-drawer">
+        <span class="btn-icon" aria-hidden="true">🛒</span>
+        <span class="btn-text">Keranjang</span>
+        <span id="cart-count-badge" class="action-badge" aria-live="polite">0</span>
+      </button>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav id="site-nav" class="site-nav" aria-label="Navigasi utama">
+        <a href="#katalog">Katalog</a>
+        <a href="#komparasi">Komparasi</a>
+        <a href="#inspeksi">Standar Kualitas</a>
+        <a href="#trade-in">Trade-in</a>
+        <a href="#cara-beli">Alur Belanja</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero section-wrap" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="hero-status-pill">
+          <span class="status-dot" aria-hidden="true"></span>
+          <span>UNIT TERINSPEKSI 25 TITIK · GARANSI RESMI & TOKO</span>
+        </div>
+        <h1 id="hero-title">Ekosistem Apple lengkap, terkurasi dengan standar teliti.</h1>
+        <p class="hero-lede">Setiap perangkat iPhone, MacBook, iPad, dan AirPods melalui protokol inspeksi perangkat keras, verifikasi legalitas IMEI/Serial Number, dan pemeriksaan performa baterai sebelum kami serahkan ke tangan Anda.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#katalog">Jelajahi Katalog</a>
+          <a class="button button-quiet" href="#komparasi">Bandingkan Model</a>
+        </div>
+        <div class="hero-trust-bar">
+          <div class="trust-item">
+            <strong>Database Browser</strong>
+            <span>Penyimpanan localStorage aman</span>
+          </div>
+          <div class="trust-item">
+            <strong>100% Legal & Terdaftar</strong>
+            <span>Kemenperin dan Bea Cukai</span>
+          </div>
+          <div class="trust-item">
+            <strong>Bebas Kunci Akun</strong>
+            <span>Siap login Apple ID pribadi</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-frame">
+          <img src="images/iphone15pro.jpg" alt="Foto unit iPhone 15 Pro Titanium di Jayapple" class="hero-product-img" width="460" height="460" fetchpriority="high">
+          <div class="hero-visual-badge">
+            <strong>Unit Resmi Jayapple</strong>
+            <span>Inspeksi 25 Titik · Garansi Aktif</span>
+          </div>
+        </div>
+        <small class="visual-note">Foto fisik unit asli langsung dari stok outlet Jayapple</small>
+      </div>
+    </section>
+
+    <section id="katalog" class="section-wrap catalog-section" aria-labelledby="catalog-title">
+      <div class="section-heading">
+        <p class="kicker">ETALASE E-COMMERCE JAYAPPLE</p>
+        <h2 id="catalog-title">Katalog perangkat Apple terverifikasi.</h2>
+        <p>Pilih kategori produk di bawah. Sesuaikan kapasitas memori, warna bodi, dan jenis garansi pada modal varian sebelum masuk ke keranjang.</p>
+      </div>
+
+      <div class="catalog-controls-panel">
+        <div class="search-box-wrap">
+          <label for="product-search-input" class="search-label">
+            <span class="search-icon" aria-hidden="true">🔍</span>
+            <span class="visually-hidden">Cari seri atau spesifikasi perangkat</span>
+          </label>
+          <input id="product-search-input" class="search-input" type="search" placeholder="Cari seri (misal: MacBook M4, iPad Pro, 15 Pro, AirPods)..." autocomplete="off">
+          <button id="search-clear-btn" class="search-clear" type="button" aria-label="Hapus teks pencarian" hidden>✕</button>
+        </div>
+
+        <div class="filter-row">
+          <div class="filter-group-series" role="group" aria-label="Filter Berdasarkan Kategori">
+            <button class="filter-chip active" type="button" data-category="all">Semua Produk</button>
+            <button class="filter-chip" type="button" data-category="iphone">iPhone</button>
+            <button class="filter-chip" type="button" data-category="macbook">MacBook</button>
+            <button class="filter-chip" type="button" data-category="ipad">iPad</button>
+            <button class="filter-chip" type="button" data-category="airpods">AirPods</button>
+            <button class="filter-chip" type="button" data-category="aksesoris">Aksesoris</button>
+          </div>
+
+          <div class="filter-group-dropdowns">
+            <label for="condition-filter" class="visually-hidden">Filter Berdasarkan Kondisi</label>
+            <select id="condition-filter" class="select-filter" aria-label="Filter berdasarkan kondisi unit">
+              <option value="all">Semua Jenis Garansi</option>
+              <option value="Baru Segel">Baru Segel Resmi</option>
+              <option value="Second Mulus">Second Mulus Garansi Toko</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="catalog-meta-info">
+          <span id="catalog-count-info" class="count-text">Menampilkan perangkat tersedia</span>
+          <span class="price-note-tag">[REAL DATA] Harga dan stok dikonfirmasi admin</span>
+        </div>
+      </div>
+
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+    </section>
+
+    <section id="komparasi" class="section-wrap compare-section" aria-labelledby="compare-title">
+      <div class="section-heading">
+        <p class="kicker">ALAT BANTU KEPUTUSAN</p>
+        <h2 id="compare-title">Bandingkan spesifikasi perangkat berdampingan.</h2>
+        <p>Gunakan perbandingan parameter perangkat keras resmi untuk menentukan pilihan yang paling efisien bagi kebutuhan komputasi dan kreasi Anda.</p>
+      </div>
+
+      <div class="compare-selectors">
+        <div class="compare-selector-card">
+          <label for="compare-select-1">Pilihan Unit Pertama</label>
+          <select id="compare-select-1" class="compare-select"></select>
+        </div>
+        <div class="compare-vs-badge" aria-hidden="true">VS</div>
+        <div class="compare-selector-card">
+          <label for="compare-select-2">Pilihan Unit Kedua</label>
+          <select id="compare-select-2" class="compare-select"></select>
+        </div>
+      </div>
+
+      <div id="compare-result-box" class="compare-table-wrap" aria-live="polite"></div>
+    </section>
+
+    <section id="inspeksi" class="section-wrap inspection-section" aria-labelledby="inspection-title">
+      <div class="section-heading">
+        <p class="kicker">PROTOKOL QUALITY CONTROL</p>
+        <h2 id="inspection-title">Standar inspeksi 25 titik perangkat keras.</h2>
+        <p>Setiap unit second maupun unit baru kami buka dan uji di hadapan Anda atau melalui rekaman video unboxing sebelum pengiriman kurir.</p>
+      </div>
+
+      <div class="inspection-grid">
+        <article class="inspection-card">
+          <div class="inspection-icon" aria-hidden="true">⚡</div>
+          <h3>Fungsi Komponen Inti</h3>
+          <p>Pengujian sensor biometrik Face ID / Touch ID, respon haptik Taptic Engine, speaker stereo ganda, dan mikrofon studio.</p>
+          <ul class="inspection-points">
+            <li>Face ID / Touch ID responsif dan akurat</li>
+            <li>True Tone aktif dan sensor cahaya adaptif</li>
+            <li>Mikrofon dan speaker jernih tanpa distorsi</li>
+          </ul>
+        </article>
+
+        <article class="inspection-card">
+          <div class="inspection-icon" aria-hidden="true">📱</div>
+          <h3>Layar & Panel Sentuh</h3>
+          <p>Pemeriksaan visual ketat untuk menjamin layar asli bebas cacat pabrik atau pemakaian.</p>
+          <ul class="inspection-points">
+            <li>Bebas shadow, burn-in, dan dead pixel</li>
+            <li>Multi-touch atau trackpad responsif presisi</li>
+            <li>Kecerahan puncak dan akurasi warna gamut P3</li>
+          </ul>
+        </article>
+
+        <article class="inspection-card">
+          <div class="inspection-icon" aria-hidden="true">🔋</div>
+          <h3>Daya & Kesehatan Baterai</h3>
+          <p>Kesehatan baterai terverifikasi dengan siklus pengisian yang wajar dan stabilitas daya teruji.</p>
+          <ul class="inspection-points">
+            <li>Battery Health stabil dan terkalibrasi normal</li>
+            <li>Pengisian daya kabel MagSafe / USB-C lancar</li>
+            <li>Suhu operasional aman saat pemrosesan beban berat</li>
+          </ul>
+        </article>
+
+        <article class="inspection-card">
+          <div class="inspection-icon" aria-hidden="true">🛡️</div>
+          <h3>Legalitas Serial & IMEI</h3>
+          <p>Jaminan konektivitas jaringan seluler bebas blokir untuk unit seluler dan legalitas serial resmi Apple.</p>
+          <ul class="inspection-points">
+            <li>Nomor seri terverifikasi di server Apple Coverage</li>
+            <li>IMEI resmi terdaftar Kemenperin atau Bea Cukai</li>
+            <li>Akun Apple ID dan iCloud telah keluar sepenuhnya</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="trade-in" class="section-wrap trade-section" aria-labelledby="trade-title">
+      <div class="trade-intro">
+        <p class="kicker">LAYANAN TUKAR TAMBAH JAYAPPLE</p>
+        <h2 id="trade-title">Bawa unit lama, bawa pulang perangkat Apple baru.</h2>
+        <p>Isi formulir ringkas di bawah. Tim verifikator Jayapple akan menghitung nilai taksir maksimal setelah unit Anda kami periksa secara objektif.</p>
+      </div>
+      <form id="trade-form" class="trade-form" novalidate>
+        <div class="field-group">
+          <label for="old-device">Model perangkat lama Anda</label>
+          <input id="old-device" name="oldDevice" type="text" autocomplete="off" placeholder="Misal: iPhone 11 128GB Black / MacBook Air M1" required>
+        </div>
+        <div class="field-group">
+          <label for="device-condition">Kondisi fisik dan kelengkapan</label>
+          <select id="device-condition" name="condition" required>
+            <option value="">Pilih kondisi perangkat</option>
+            <option value="Mulus Fullset">Mulus tanpa lecet, fungsi normal 100%, kotak lengkap</option>
+            <option value="Pemakaian Wajar Unit Only">Pemakaian wajar bodi mulus, fungsi 100%, batangan</option>
+            <option value="Ada Minus Fisik atau Baterai">Ada lecet bodi atau baterai perlu servis</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label for="trade-target-model">Unit incaran yang ingin dibeli di Jayapple</label>
+          <select id="trade-target-model" name="targetModel">
+            <option value="iPhone 15 Pro">iPhone 15 Pro</option>
+            <option value="iPhone 15 Pro Max">iPhone 15 Pro Max</option>
+            <option value="MacBook Pro 14 M4">MacBook Pro 14 M4</option>
+            <option value="MacBook Air 13 M2">MacBook Air 13 M2</option>
+            <option value="iPad Pro 11 M4">iPad Pro 11 M4</option>
+            <option value="AirPods Generasi ke-3">AirPods Generasi ke-3</option>
+          </select>
+        </div>
+        <button class="button button-primary" type="submit">Siapkan Format Pengajuan Trade-in</button>
+        <p id="trade-feedback" class="form-feedback" role="status" aria-live="polite">Format konsultasi trade-in akan disiapkan untuk verifikasi WhatsApp.</p>
+      </form>
+    </section>
+
+    <section id="cara-beli" class="process-section" aria-labelledby="process-title">
+      <div class="section-wrap">
+        <div class="section-heading compact">
+          <p class="kicker">PROSEDUR PEMBELIAN</p>
+          <h2 id="process-title">Alur pesanan dari katalog ke tangan Anda.</h2>
+        </div>
+        <ol class="process-list">
+          <li>
+            <span>01</span>
+            <div>
+              <h3>Pilih Varian & Konfigurasi</h3>
+              <p>Tentukan model, kapasitas penyimpanan, warna, dan jenis garansi yang cocok dengan anggaran Anda.</p>
+            </div>
+          </li>
+          <li>
+            <span>02</span>
+            <div>
+              <h3>Periksa Keranjang & Checkout</h3>
+              <p>Lengkapi identitas pemesan, pilih opsi ambil di outlet fisik atau pengiriman ekspedisi berasuransi.</p>
+            </div>
+          </li>
+          <li>
+            <span>03</span>
+            <div>
+              <h3>Penerbitan Invoice Resmi</h3>
+              <p>Nomor invoice unik dibuat otomatis dan tersimpan di browser Anda. Teruskan ke admin untuk verifikasi cepat.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="kontak" class="section-wrap contact-section" aria-labelledby="contact-title">
+      <div>
+        <p class="kicker">LOKASI & DUKUNGAN KONSUMEN</p>
+        <h2 id="contact-title">Kunjungi outlet Jayapple atau hubungi kami daring.</h2>
+        <p>Anda dipersilakan datang langsung ke outlet fisik Jayapple untuk memeriksa unit secara langsung sebelum memutuskan membeli.</p>
+      </div>
+      <div class="contact-details">
+        <div><span>Kontak WhatsApp Resmi</span><strong>0895-4117-65065</strong></div>
+        <div><span>Alamat Outlet Fisik</span><strong>Jl. Bojong Indah RT 01 / RW 06</strong></div>
+        <div><span>Jam Operasional</span><strong>09.00 - 22.00 WIB</strong></div>
+        <div><span>Rekening Resmi Toko</span><strong>BCA 2303175741 a/n Jayapple</strong></div>
+        <button id="whatsapp-button" class="button button-primary" type="button">Chat Konsultasi WhatsApp</button>
+        <p id="contact-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-brand-col">
+      <span class="footer-wordmark">Jayapple</span>
+      <p>E-Commerce Penjualan iPhone, MacBook, iPad, dan AirPods Resmi & Pre-Owned Terverifikasi.</p>
+    </div>
+    <div class="footer-legal-col">
+      <span>© [TAHUN] Jayapple. Seluruh transaksi menggunakan invoice terverifikasi.</span>
+      <span class="footer-disclaimer">Apple, iPhone, MacBook, iPad, dan AirPods adalah merek dagang Apple Inc. Website ini dikelola oleh reseller independen Jayapple.</span>
+    </div>
+  </footer>
+
+  <div id="cart-backdrop" class="modal-backdrop" hidden></div>
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+    <div class="drawer-header">
+      <div class="drawer-title-wrap">
+        <h2 id="cart-title">Keranjang Belanja Jayapple</h2>
+        <span id="drawer-item-count" class="drawer-subtitle">0 unit dipilih</span>
+      </div>
+      <button id="close-cart-btn" class="close-button" type="button" aria-label="Tutup keranjang belanja">✕</button>
+    </div>
+    <div id="cart-items-container" class="cart-body"></div>
+    <div class="drawer-footer">
+      <div class="cart-summary-row">
+        <span>Total Unit Terpilih</span>
+        <strong id="cart-total-qty">0 item</strong>
+      </div>
+      <div class="cart-summary-row">
+        <span>Estimasi Nilai Unit</span>
+        <strong id="cart-total-price">Rp 0</strong>
+      </div>
+      <button id="open-checkout-btn" class="button button-primary button-full" type="button">Lanjut ke Formulir Checkout</button>
+      <button id="clear-cart-btn" class="button button-quiet button-full" type="button">Kosongkan Keranjang</button>
+    </div>
+  </aside>
+
+  <div id="variant-backdrop" class="modal-backdrop" hidden></div>
+  <div id="variant-modal" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="variant-modal-title" hidden>
+    <div class="modal-header">
+      <h2 id="variant-modal-title">Konfigurasi Spesifikasi Unit</h2>
+      <button id="close-variant-btn" class="close-button" type="button" aria-label="Tutup pemilih varian">✕</button>
+    </div>
+    <div class="modal-body">
+      <p id="variant-product-desc" class="modal-desc"></p>
+      
+      <div class="variant-form-group">
+        <label for="modal-capacity-select">Kapasitas Penyimpanan / Memori</label>
+        <select id="modal-capacity-select"></select>
+      </div>
+
+      <div class="variant-form-group">
+        <label for="modal-condition-select">Pilihan Kondisi & Garansi</label>
+        <select id="modal-condition-select">
+          <option value="Baru Segel Resmi">Baru Segel (Garansi Resmi 1 Tahun)</option>
+          <option value="Second Mulus Garansi Toko">Second Mulus (Garansi Toko 1 Bulan)</option>
+        </select>
+      </div>
+
+      <div class="variant-form-group">
+        <label for="modal-color-select">Pilihan Warna Fisik</label>
+        <select id="modal-color-select"></select>
+      </div>
+
+      <div class="variant-form-group">
+        <label for="modal-quantity-input">Jumlah Unit</label>
+        <div class="qty-control">
+          <button id="modal-qty-minus" class="qty-btn" type="button" aria-label="Kurangi jumlah">-</button>
+          <input id="modal-quantity-input" type="number" min="1" max="10" value="1" readonly>
+          <button id="modal-qty-plus" class="qty-btn" type="button" aria-label="Tambah jumlah">+</button>
+        </div>
+      </div>
+
+      <div class="selected-summary-box">
+        <span>Ringkasan Konfigurasi Pilihan:</span>
+        <p id="variant-selection-preview"></p>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="confirm-add-cart-btn" class="button button-primary button-full" type="button">Tambahkan ke Keranjang Belanja</button>
+    </div>
+  </div>
+
+  <div id="checkout-backdrop" class="modal-backdrop" hidden></div>
+  <div id="checkout-modal" class="modal-dialog modal-dialog-large" role="dialog" aria-modal="true" aria-labelledby="checkout-modal-title" hidden>
+    <div class="modal-header">
+      <h2 id="checkout-modal-title">Formulir Checkout & Data Penerima</h2>
+      <button id="close-checkout-btn" class="close-button" type="button" aria-label="Tutup form checkout">✕</button>
+    </div>
+    <form id="checkout-form" class="checkout-form" novalidate>
+      <div class="modal-body checkout-grid">
+        <div class="checkout-form-column">
+          <div class="field-group">
+            <label for="customer-name">Nama Lengkap Pemesan</label>
+            <input id="customer-name" name="customerName" type="text" autocomplete="name" placeholder="Nama Anda sesuai KTP" required>
+          </div>
+
+          <div class="field-group">
+            <label for="customer-phone">Nomor WhatsApp Aktif</label>
+            <input id="customer-phone" name="customerPhone" type="tel" autocomplete="tel" placeholder="Contoh: 081234567890" required>
+          </div>
+
+          <div class="field-group">
+            <label for="delivery-method">Metode Pengiriman / Penyerahan</label>
+            <select id="delivery-method" name="deliveryMethod" required>
+              <option value="Ambil Sendiri di Outlet Jayapple">Ambil Sendiri di Outlet Jayapple</option>
+              <option value="Ekspedisi JNE YES Asuransi">Ekspedisi JNE YES (Asuransi)</option>
+              <option value="Ekspedisi J&T Express Asuransi">Ekspedisi J&T Express (Asuransi)</option>
+              <option value="Ekspedisi SiCepat BEST">Ekspedisi SiCepat BEST (Asuransi)</option>
+            </select>
+          </div>
+
+          <div id="shipping-address-group" class="field-group">
+            <label for="customer-address">Alamat Pengiriman Lengkap</label>
+            <textarea id="customer-address" name="customerAddress" rows="3" placeholder="Nama jalan, nomor rumah, RT/RW, kelurahan, kecamatan, kota, dan kode pos"></textarea>
+          </div>
+
+          <div class="field-group">
+            <label for="payment-method">Metode Pembayaran</label>
+            <select id="payment-method" name="paymentMethod" required>
+              <option value="Transfer Bank BCA Resmi Jayapple">Transfer Bank BCA Resmi Jayapple</option>
+              <option value="Transfer Bank Mandiri Resmi Jayapple">Transfer Bank Mandiri Resmi Jayapple</option>
+              <option value="QRIS Pembayaran Digital Terverifikasi">QRIS Pembayaran Digital Dinamis</option>
+              <option value="Bayar Tunai / EDC di Outlet Jayapple">Bayar Tunai / Kartu di Outlet Jayapple</option>
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label for="order-note">Instruksi Khusus untuk Paket (Opsional)</label>
+            <input id="order-note" name="orderNote" type="text" placeholder="Misal: bungkus bubble wrap tebal ganda">
+          </div>
+        </div>
+
+        <div class="checkout-summary-column">
+          <div class="checkout-summary-card">
+            <h3>Rincian Barang yang Dipesan</h3>
+            <div id="checkout-items-list" class="checkout-items-list"></div>
+            <div class="checkout-subtotal-box">
+              <div class="subtotal-row">
+                <span>Total Unit:</span>
+                <strong id="checkout-units-count">0 unit</strong>
+              </div>
+              <div class="subtotal-row">
+                <span>Biaya Produk:</span>
+                <strong id="checkout-total-price-display">Rp 0</strong>
+              </div>
+              <div class="subtotal-row">
+                <span>Biaya Kirim & Asuransi:</span>
+                <span id="shipping-fee-label">Bebas Biaya (Ambil di Outlet)</span>
+              </div>
+              <div class="subtotal-row total-highlight">
+                <span>Status Total:</span>
+                <strong>Diverifikasi Admin Jayapple</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="button button-primary button-full btn-wa-checkout" type="submit">
+          <svg class="wa-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+            <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.23 8.23 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.13-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.57.13.17 1.75 2.67 4.24 3.75.59.26 1.05.41 1.41.53.59.19 1.13.16 1.56.1.47-.07 1.47-.6 1.68-1.18.21-.59.21-1.09.15-1.19-.06-.1-.23-.17-.48-.29z"/>
+          </svg>
+          <span>Konfirmasi Pesanan via WhatsApp</span>
+        </button>
+        <p id="checkout-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+
+  <div id="invoice-backdrop" class="modal-backdrop" hidden></div>
+  <div id="invoice-modal" class="modal-dialog modal-dialog-large" role="dialog" aria-modal="true" aria-labelledby="invoice-modal-title" hidden>
+    <div class="modal-header">
+      <div class="invoice-header-title">
+        <h2 id="invoice-modal-title">Faktur Pesanan Resmi</h2>
+        <span class="invoice-tag">JAYAPPLE E-COMMERCE</span>
+      </div>
+      <button id="close-invoice-btn" class="close-button" type="button" aria-label="Tutup bukti invoice">✕</button>
+    </div>
+    <div class="modal-body invoice-body">
+      <div class="invoice-status-banner">
+        <span class="badge-dot" aria-hidden="true"></span>
+        <span>STATUS: MENUNGGU VERIFIKASI ADMIN JAYAPPLE</span>
+      </div>
+
+      <div class="invoice-meta-grid">
+        <div>
+          <span>Nomor Faktur (Invoice ID)</span>
+          <strong id="invoice-number-display">#INV-000000</strong>
+        </div>
+        <div>
+          <span>Tanggal & Waktu Pemesanan</span>
+          <strong id="invoice-date-display">-</strong>
+        </div>
+        <div>
+          <span>Nama Pemesan</span>
+          <strong id="invoice-customer-display">-</strong>
+        </div>
+        <div>
+          <span>Nomor WhatsApp Pemesan</span>
+          <strong id="invoice-phone-display">-</strong>
+        </div>
+        <div>
+          <span>Metode Penyerahan</span>
+          <strong id="invoice-delivery-display">-</strong>
+        </div>
+        <div>
+          <span>Metode Pembayaran</span>
+          <strong id="invoice-payment-display">-</strong>
+        </div>
+      </div>
+
+      <div class="invoice-items-table-wrap">
+        <table class="invoice-table">
+          <thead>
+            <tr>
+              <th scope="col">Model & Seri</th>
+              <th scope="col">Spesifikasi Varian</th>
+              <th scope="col">Kuantitas</th>
+              <th scope="col">Status Harga</th>
+            </tr>
+          </thead>
+          <tbody id="invoice-table-body"></tbody>
+        </table>
+      </div>
+
+      <div class="invoice-instructions">
+        <p><strong>Langkah Verifikasi Selanjutnya:</strong></p>
+        <p>Kirimkan faktur ini ke WhatsApp admin resmi Jayapple untuk mendapatkan bukti video fisik unit, konfirmasi nomor resi, dan rekening pembayaran resmi.</p>
+      </div>
+
+      <div class="invoice-actions">
+        <button id="invoice-whatsapp-btn" class="button button-primary button-full" type="button">Kirimkan Invoice ke WhatsApp Jayapple</button>
+        <button id="invoice-print-btn" class="button button-quiet button-full" type="button">Cetak / Simpan PDF Invoice</button>
+        <button id="invoice-copy-btn" class="button button-quiet button-full" type="button">Salin Rincian Teks Invoice</button>
+      </div>
+      <p id="invoice-feedback" class="form-feedback" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+</body>
+</html>
